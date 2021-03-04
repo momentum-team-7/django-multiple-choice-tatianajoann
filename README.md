@@ -1,5 +1,6 @@
 # Django Project Template
 
+hey what's up
 This project was generated from the Momentum Django project template. This template sets up some minimal changes:
 
 - [django-extensions](https://django-extensions.readthedocs.io/en/latest/) and [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/) are both installed and set up.
