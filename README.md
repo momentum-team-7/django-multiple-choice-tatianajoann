@@ -6,10 +6,14 @@ Your creativity and common sense should be used as you work. There are common fe
 
 Likewise, come up with your own features to make your project unique. You will likely use this project in your portfolio, so make it stand out!
 
+We will do these projects in two phases:
+* Phase 1 Backend Due Monday
+* Phase 2 Front End with JavaScript due Wednesday
+
 # Rules for all projects
 
 * Your application should be styled. It should be usable and aesthetically neutral, at a minimum.
-* Your application should be able to run from scratch by downloading the repo, running `poetry install`, `poetry shell`, `python manage.py migrate`, and `python manage.py runserver`. If there are any other steps necessary, please put them in a README.md file.
+* Your application should be started using the [Django Project Template](https://github.com/momentumlearn/django-project-template)
 
 # The Projects
 
