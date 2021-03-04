@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.homepage, name='homepage'),
+    path('python', views.python_page, name='python_page'),
+    path('javascript', views.javascript_page, name='javascript_page'),
 ]
 
 if settings.DEBUG:
