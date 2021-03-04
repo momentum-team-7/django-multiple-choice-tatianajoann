@@ -4,4 +4,8 @@
 {% block content %}
 <p> This is the javascript page</p>
 
+{% for language in languages %}
+{{language.name}}
+{% endfor %}
+
 {% endblock content %}

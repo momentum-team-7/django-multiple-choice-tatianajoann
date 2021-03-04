@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<p> This is the {{language}} page</p>
+
+{% for snippet in snippets %}
+{{snippet.code}}
+{% endfor %}
+
+{% endblock content %}

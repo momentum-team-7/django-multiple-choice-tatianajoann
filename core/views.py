@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Language, Snippet
 
 
@@ -7,14 +7,16 @@ from .models import Language, Snippet
 
 @login_required
 def homepage(request):
-    return render(request, 'homepage.html', {})
-
-
-def python_page(request):
     languages = Language.objects.all()
-    return render(request, 'python_page.html', {'languages': languages})
+    return render(request, 'homepage.html', {'languages': languages})
 
 
-def javascript_page(request):
-    languages = Language.objects.all()
+def language_page(request, pk):
+    language = get_object_or_404(Language, pk=pk)
+    snippets = Snippet.objects.filter(language=language)
+    return render(request, 'language_page.html', {'language': language, 'snippets': snippets})
+
+
+# def javascript_page(request, pk):
+    languages = get_object_or_404(Language, pk=pk)
     return render(request, 'javascript_page.html', {'languages': languages})
