@@ -17,13 +17,18 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from core import views
+from django.http import HttpResponseRedirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.homepage, name='homepage'),
     path('language/<int:pk>', views.language_page, name='language_page'),
-    #path('javascript/<int:pk>', views.javascript_page, name='javascript_page'),
+    path('snippet/new', views.add_snippet, name="add-snippet"),
+    path('language/new', views.add_language, name="add-language"),
+    path('language/<int:pk>/edit', views.edit_language, name="edit-language"),
+    path('snippet/<int:pk>/edit', views.edit_snippet, name="edit-snippet"),
+    path('snippet/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
 ]
 
 if settings.DEBUG:

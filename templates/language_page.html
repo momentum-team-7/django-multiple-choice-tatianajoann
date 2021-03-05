@@ -7,6 +7,11 @@
 
 {% for snippet in snippets %}
 {{snippet.code}}
+
+<button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
+<button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
 {% endfor %}
+
+<button><a href="{% url 'add-snippet' %}">Add New Snippet!</a></button>
 
 {% endblock content %}
