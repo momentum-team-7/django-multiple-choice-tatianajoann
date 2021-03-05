@@ -5,9 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'core.css' %}">
     <title>Document</title>
 </head>
 <body>
+    <a href='http://127.0.0.1:8000'>Home</a>
+    
+    <div class="account-buttons">
+        <button class="user-button"><a href="http://127.0.0.1:8000/accounts/logout/">logout</a></button>
+        <button class="user-button"><a href="http://127.0.0.1:8000/accounts/login/">login</a></button>
+        <button class="user-button"><a href="http://127.0.0.1:8000/accounts/register/">Register</a></button>
+    </div>
+    
+    
     {% block content %}
 
     {% endblock content %}
