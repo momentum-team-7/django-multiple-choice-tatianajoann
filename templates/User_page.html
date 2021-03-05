@@ -4,6 +4,7 @@
 
 {% for snippet in snippets %}
 {{snippet.code}}
+<button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 <br>
 
 {% endfor %}

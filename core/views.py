@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Language, Snippet, User
 from .forms import SnippetForm, LanguageForm
 from django.http import HttpResponseRedirect
+import pyperclip
 
 # Create your views here.
 
@@ -19,11 +20,10 @@ def language_page(request, pk):
     return render(request, 'language_page.html', {'language': language, 'snippets': snippets})
 
 
-
 def user_page(request, pk):
     user = get_object_or_404(User, pk=pk)
     snippets = Snippet.objects.filter(user=user)
-    return render(request, 'user_page.html', {'user': user, 'snippets': snippets})   
+    return render(request, 'user_page.html', {'user': user, 'snippets': snippets})
 
 
 def add_snippet(request,):
@@ -52,6 +52,12 @@ def edit_snippet(request, pk):
 def delete_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.delete()
+    return HttpResponseRedirect('/')
+
+
+def copy_snippet(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    pyperclip.copy(snippet.code)
     return HttpResponseRedirect('/')
 
 
