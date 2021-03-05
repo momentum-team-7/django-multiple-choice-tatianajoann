@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for snippet in snippets %}
+{{snippet.code}}
+<br>
+
+{% endfor %}
+
+{% endblock content %}
