@@ -29,6 +29,7 @@ urlpatterns = [
     path('language/<int:pk>/edit', views.edit_language, name="edit-language"),
     path('snippet/<int:pk>/edit', views.edit_snippet, name="edit-snippet"),
     path('snippet/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
+    path('user/<int:pk>', views.user_page, name="user"),
 ]
 
 if settings.DEBUG:

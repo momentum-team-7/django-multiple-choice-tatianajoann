@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
-from .models import Language, Snippet
+from .models import Language, Snippet, User
 from .forms import SnippetForm, LanguageForm
 from django.http import HttpResponseRedirect
 
@@ -17,6 +17,13 @@ def language_page(request, pk):
     language = get_object_or_404(Language, pk=pk)
     snippets = Snippet.objects.filter(language=language)
     return render(request, 'language_page.html', {'language': language, 'snippets': snippets})
+
+
+
+def user_page(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    snippets = Snippet.objects.filter(user=user)
+    return render(request, 'user_page.html', {'user': user, 'snippets': snippets})   
 
 
 def add_snippet(request,):
