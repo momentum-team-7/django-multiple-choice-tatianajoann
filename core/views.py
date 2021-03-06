@@ -8,7 +8,7 @@ import pyperclip
 # Create your views here.
 
 
-@login_required
+
 def homepage(request):
     languages = Language.objects.all()
     return render(request, 'homepage.html', {'languages': languages})
@@ -19,7 +19,7 @@ def language_page(request, pk):
     snippets = Snippet.objects.filter(language=language)
     return render(request, 'language_page.html', {'language': language, 'snippets': snippets})
 
-
+@login_required
 def user_page(request, pk):
     user = get_object_or_404(User, pk=pk)
     snippets = Snippet.objects.filter(user=user)

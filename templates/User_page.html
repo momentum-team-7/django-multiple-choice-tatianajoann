@@ -6,7 +6,12 @@
 {{snippet.code}}
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 <br>
-
+{% if snippet.user == request.user %}
+<button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
+<br>
+<button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
+<br>
+{% endif %}
 {% endfor %}
 
 {% endblock content %}
