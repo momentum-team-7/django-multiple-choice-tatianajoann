@@ -3,12 +3,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from .models import Language, Snippet, User
-from .forms import SnippetForm, LanguageForm
+from .forms import SnippetForm, LanguageForm, SearchForm
 from django.http import HttpResponseRedirect
 import pyperclip
 
 # Create your views here.
-
 
 
 def homepage(request):
@@ -21,14 +20,23 @@ def language_page(request, pk):
     snippets = Snippet.objects.filter(language=language)
     return render(request, 'language_page.html', {'language': language, 'snippets': snippets})
 
+
 @login_required
 def user_page(request, pk):
     user = get_object_or_404(User, pk=pk)
     snippets = Snippet.objects.filter(user=user)
-    return render(request, 'user_page.html', {'user': user, 'snippets': snippets})
+    form = SearchForm()
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SearchForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            term = form.cleaned_data["search"]
+            snippets = snippets.filter(language__name__icontains=term)
+    return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form})
 
 
-def add_snippet(request,):
+def add_snippet(request):
     if request.method == 'POST':
         form = SnippetForm(request.POST)
         if form.is_valid():
@@ -88,44 +96,9 @@ def edit_language(request, pk):
     return render(request, 'edit_language.html', {'form': form, 'language': language})
 
 
-def search_results(request):
-    snippet = Snippet.objects.filter(code__icontains='javascript')
-    return render(request, 'search_results.html', {'snippet': snippet})
-    
-    
-
-
-
-
-    
-    # for code in snippet:
-    #     post = render(request, 'search_results.html', {'code': code})
-    #     print(post)
-    # return post
-    
-
-
-
 # class search_results(ListView):
-#     template_name = 'search_results.html'
-    
+#     template_name='search_results.html'
+
 #     def results(self):
-        
+
 #         return Snippet.objects.filter(name__icontains='python')
-
-
-
-
-
-# def search_view(request):
-#     countries = Country.objects.all()
-#     form = SearchForm(request.GET)
-#     if form.is_valid():
-#         if form.cleaned_data["q"]:
-#             countries = countries.filter(name__icontains=form.cleaned_data["q"])
-#         elif form.cleaned_data["government_type"]:
-#             countries = countries.filter(government=form.cleaned_data["government_type"])
-#         elif form.cleaned_data["industry"]:
-#             countries = countries.filter(industries=form.cleaned_data["industries"])
-#     return render(request, "country/search.html",
-#             {"form": form, "country_list": countries})

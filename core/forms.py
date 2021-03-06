@@ -11,4 +11,8 @@ class LanguageForm(forms.ModelForm):
 class SnippetForm(forms.ModelForm):
     class Meta:
         model = Snippet
-        fields = ['type_of', 'language', 'code']
+        fields = ['type_of', 'language', 'code', 'user']
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(label="search", max_length=80)
