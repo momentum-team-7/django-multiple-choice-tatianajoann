@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import TemplateView, ListView
+from django.db.models import Q
 from .models import Language, Snippet, User
 from .forms import SnippetForm, LanguageForm
 from django.http import HttpResponseRedirect
@@ -84,3 +86,46 @@ def edit_language(request, pk):
     else:
         form = LanguageForm(instance=language)
     return render(request, 'edit_language.html', {'form': form, 'language': language})
+
+
+def search_results(request):
+    snippet = Snippet.objects.filter(code__icontains='javascript')
+    return render(request, 'search_results.html', {'snippet': snippet})
+    
+    
+
+
+
+
+    
+    # for code in snippet:
+    #     post = render(request, 'search_results.html', {'code': code})
+    #     print(post)
+    # return post
+    
+
+
+
+# class search_results(ListView):
+#     template_name = 'search_results.html'
+    
+#     def results(self):
+        
+#         return Snippet.objects.filter(name__icontains='python')
+
+
+
+
+
+# def search_view(request):
+#     countries = Country.objects.all()
+#     form = SearchForm(request.GET)
+#     if form.is_valid():
+#         if form.cleaned_data["q"]:
+#             countries = countries.filter(name__icontains=form.cleaned_data["q"])
+#         elif form.cleaned_data["government_type"]:
+#             countries = countries.filter(government=form.cleaned_data["government_type"])
+#         elif form.cleaned_data["industry"]:
+#             countries = countries.filter(industries=form.cleaned_data["industries"])
+#     return render(request, "country/search.html",
+#             {"form": form, "country_list": countries})
