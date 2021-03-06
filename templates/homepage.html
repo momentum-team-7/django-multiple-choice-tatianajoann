@@ -5,7 +5,12 @@
 
 <h1>This is the homepage</h1>
 {% for language in languages %}
+
+{% if user.is_authenticated %}
+
 <button><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></button>
+
+{% endif %}
 
 {% endfor %}
 {% endblock content %}

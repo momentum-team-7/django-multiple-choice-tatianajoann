@@ -7,9 +7,10 @@
 
 {% for snippet in snippets %}
 {{snippet.code}}
-
+{% if snippet.user.is_authenticated %}
 <button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
 <button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
+{% endif %}
 {% endfor %}
 
 <button><a href="{% url 'add-snippet' %}">Add New Snippet!</a></button>
