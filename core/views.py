@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Language, Snippet, User
 from .forms import SnippetForm, LanguageForm
 from django.http import HttpResponseRedirect
@@ -58,7 +58,7 @@ def delete_snippet(request, pk):
 def copy_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     pyperclip.copy(snippet.code)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def add_language(request):
