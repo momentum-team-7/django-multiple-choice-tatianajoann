@@ -21,4 +21,4 @@ class Snippet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name='user')
 
     def __str__(self):
-        return self.type_of
+        return f'{self.code},{self.type_of}'
