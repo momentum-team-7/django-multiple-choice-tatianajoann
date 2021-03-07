@@ -32,7 +32,9 @@ def user_page(request, pk):
         # check whether it's valid:
         if form.is_valid():
             term = form.cleaned_data["search"]
-            snippets = snippets.filter(language__name__icontains=term)
+            languagesnip = snippets.filter(language__name__icontains=term)
+            codesnip = snippets.filter(code__icontains=term)
+            snippets = languagesnip | codesnip
     return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form})
 
 
