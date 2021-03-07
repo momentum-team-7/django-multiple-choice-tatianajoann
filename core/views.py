@@ -23,6 +23,7 @@ def language_page(request, pk):
 
 @login_required
 def user_page(request, pk):
+    languages = Language.objects.all()
     user = get_object_or_404(User, pk=pk)
     snippets = Snippet.objects.filter(user=user)
     form = SearchForm()
@@ -35,7 +36,7 @@ def user_page(request, pk):
             languagesnip = snippets.filter(language__name__icontains=term)
             codesnip = snippets.filter(code__icontains=term)
             snippets = languagesnip | codesnip
-    return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form})
+    return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form, 'languages': languages})
 
 
 def add_snippet(request):

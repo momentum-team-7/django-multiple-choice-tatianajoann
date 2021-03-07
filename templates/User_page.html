@@ -23,4 +23,11 @@
 {% endif %}
 {% endfor %}
 
+{% for language in languages %}
+
+<button><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></button>
+
+
+{% endfor %}
+
 {% endblock content %}
