@@ -4,15 +4,17 @@
 
 {% block content %}
 <p> This is the {{language}} page</p>
-
+{% for newlanguage in newlanguages %}
 {% for snippet in snippets %}
-{{snippet.code}}
+
+<pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
+
 {% if snippet.user.is_authenticated %}
 <button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
 <button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
 {% endif %}
 {% endfor %}
-
+{% endfor %}
 <button><a href="{% url 'add-snippet' %}">Add New Snippet!</a></button>
 
 
