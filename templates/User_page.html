@@ -13,6 +13,7 @@
 
 {% for snippet in snippets %}
 {{snippet.code}}
+<div>language:</div>{{snippet.language}}
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 <br>
 {% if snippet.user == request.user %}

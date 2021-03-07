@@ -32,13 +32,21 @@ def user_page(request, pk):
         # check whether it's valid:
         if form.is_valid():
             term = form.cleaned_data["search"]
-            snippets = snippets.filter(language__name__icontains=term)
+            print(snippets)
+            languages = snippets.filter(language__name__icontains=term)
+            user_snippets = snippets.filter(code__icontains=term)
+            kind = snippets.filter(type_of__icontains=term)
+            print(kind)
+            snippets = languages | user_snippets
+            snippets = user_snippets | kind
+
     return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form})
 
 
 def add_snippet(request):
+    user = get_object_or_404(User, pk=request.user.pk)
     if request.method == 'POST':
-        form = SnippetForm(request.POST)
+        form = SnippetForm(request.POST, initial={'user': user})
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/')
