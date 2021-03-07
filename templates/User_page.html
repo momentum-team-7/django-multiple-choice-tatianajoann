@@ -14,6 +14,7 @@
 
 {% for language in languages %}
 {% for snippet in snippets %}
+{% if snippet.language == language %}
 <pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
 
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
@@ -24,6 +25,8 @@
 <button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
 <br>
 {% endif %}
+{% endif %}
+
 {% endfor %}
 
 

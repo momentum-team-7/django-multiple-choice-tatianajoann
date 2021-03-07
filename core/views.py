@@ -19,7 +19,15 @@ def language_page(request, pk):
     language = get_object_or_404(Language, pk=pk)
     newlanguages = Language.objects.all()
     snippets = Snippet.objects.filter(language=language)
-    return render(request, 'language_page.html', {'language': language, 'snippets': snippets, 'newlanguages': newlanguages})
+    form = SearchForm()
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            term = form.cleaned_data["search"]
+            languagesnip = snippets.filter(language__name__icontains=term)
+            codesnip = snippets.filter(code__icontains=term)
+            snippets = languagesnip | codesnip
+    return render(request, 'language_page.html', {'language': language, 'snippets': snippets, 'newlanguages': newlanguages, 'form': form})
 
 
 @login_required
@@ -51,6 +59,16 @@ def add_snippet(request):
     else:
         form = SnippetForm()
     return render(request, 'add_snippet.html', {'form': form})
+
+
+def save_snippet(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+
+    snippet.pk = None
+    print(request.user)
+    snippet.user = request.user
+    snippet.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def edit_snippet(request, pk):
