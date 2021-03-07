@@ -8,11 +8,14 @@
     <input type="submit" value="Submit" placeholder="Search..."></input>
 </form>
 
+{% for language in languages %}
+<button><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></button>
+{% endfor %}
 
-
-
+{% for language in languages %}
 {% for snippet in snippets %}
-<code>{{snippet.code}}</code>
+<pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
+
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 <br>
 {% if snippet.user == request.user %}
@@ -23,9 +26,9 @@
 {% endif %}
 {% endfor %}
 
-{% for language in languages %}
 
-<button><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></button>
+
+
 
 
 {% endfor %}

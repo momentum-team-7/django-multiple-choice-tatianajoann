@@ -17,8 +17,9 @@ def homepage(request):
 
 def language_page(request, pk):
     language = get_object_or_404(Language, pk=pk)
+    newlanguages = Language.objects.all()
     snippets = Snippet.objects.filter(language=language)
-    return render(request, 'language_page.html', {'language': language, 'snippets': snippets})
+    return render(request, 'language_page.html', {'language': language, 'snippets': snippets, 'newlanguages': newlanguages})
 
 
 @login_required
