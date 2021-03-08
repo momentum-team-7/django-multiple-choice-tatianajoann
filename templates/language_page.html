@@ -23,6 +23,7 @@
 <button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button> 
 {% endif %}
 <button><a href="{% url 'save-snippet' pk=snippet.pk %}">Save Snippet</a></button>
+<button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 {% endif %}
 {% endif %}
 {% endfor %}
