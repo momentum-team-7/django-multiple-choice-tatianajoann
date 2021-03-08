@@ -15,7 +15,7 @@
 {% for snippet in snippets %}
 {% if snippet.language == newlanguage %}
 <pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
-<p>author: {{snippet.user}}</p>
+<p>author: <a href="{% url 'user' pk=snippet.user.pk %}">{{snippet.user}}</a></p>
 
 {% if snippet.user.is_authenticated %}
 {% if snippet.user == request.user %}
