@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from .models import Language, Snippet, User
 from .forms import SnippetForm, LanguageForm, SearchForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 import pyperclip
 
 # Create your views here.
@@ -62,12 +62,17 @@ def add_snippet(request):
 
 
 def save_snippet(request, pk):
-    snippet = get_object_or_404(Snippet, pk=pk)
-    snippet.pk = None
-    print(request.user)
-    snippet.user = request.user
-    snippet.save()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        snippet = get_object_or_404(Snippet, pk=pk)
+        snippet.save()
+        data = {
+            'coppied': 'YES'
+        }
+    else:
+        data = {
+            'coppied': 'NO WAY'
+        }
+    return JsonResponse(data)
 
 
 def edit_snippet(request, pk):
@@ -83,9 +88,17 @@ def edit_snippet(request, pk):
 
 
 def delete_snippet(request, pk):
-    snippet = get_object_or_404(Snippet, pk=pk)
-    snippet.delete()
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        snippet = get_object_or_404(Snippet, pk=pk)
+        snippet.delete()
+        data = {
+            'deleted': 'YES'
+        }
+    else:
+        data = {
+            'deleted': 'NO WAY'
+        }
+    return JsonResponse(data)
 
 
 def copy_snippet(request, pk):
