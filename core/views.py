@@ -86,7 +86,7 @@ def edit_snippet(request, pk):
 def delete_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
     snippet.delete()
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def copy_snippet(request, pk):
