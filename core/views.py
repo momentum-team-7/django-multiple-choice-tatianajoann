@@ -63,7 +63,6 @@ def add_snippet(request):
 
 def save_snippet(request, pk):
     snippet = get_object_or_404(Snippet, pk=pk)
-
     snippet.pk = None
     print(request.user)
     snippet.user = request.user
