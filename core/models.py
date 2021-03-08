@@ -17,7 +17,7 @@ class Snippet(models.Model):
     type_of = models.CharField(max_length=280)
     language = models.ForeignKey(
         Language, on_delete=models.CASCADE, blank=True, null=True, related_name="language")
-    code = models.CharField(max_length=1500, blank=True, null=True)
+    code = models.TextField(max_length=1500, blank=True, null=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, default=None, related_name='user')
 
