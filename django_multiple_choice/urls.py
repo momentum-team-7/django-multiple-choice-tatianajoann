@@ -31,6 +31,7 @@ urlpatterns = [
     path('snippet/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
     path('user/<int:pk>', views.user_page, name="user"),
     path('snippet/<int:pk>/copy', views.copy_snippet, name="copy-snippet"),
+    path('snippet<int:pk>/save', views.save_snippet, name="save-snippet")
 ]
 
 if settings.DEBUG:
