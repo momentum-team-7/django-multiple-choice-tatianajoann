@@ -1,14 +1,94 @@
 body {
-    color: purple;
+  color: #000000;
+  background: #ccff33;
+  font-family: "Roboto", sans-serif;
+  margin: 0 auto;
 }
 
+h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 54px;
+}
+
+h2 {
+  font-size: 48px;
+  color: #000000;
+}
+
+h2:hover {
+  text-shadow: 0 0 5px #38b000, 0 0 5px #38b000;
+}
+
+.codesnippets {
+  font-family: "DotGothic16", sans-serif;
+  color: #000000;
+  font-weight: bold;
+  background: #38b000;
+  width: 100%;
+  margin: 0;
+  text-shadow: 0 0 8px #ccff33, 0 0 8px #9ef01a;
+}
+
+.languagecontain {
+  display: flex;
+  font-size: 18px;
+  margin-right: 100px;
+  margin-left: 100px;
+  font-family: "DotGothic16", sans-serif;
+}
+
+p {
+  margin: 0 auto;
+  margin-right: 10px;
+  color: #004b23;
+  font-weight: bold;
+}
+
+button {
+  background: #ffffff;
+  border: solid;
+  border-color: #006400;
+  border-width: 1px;
+  margin-right: 3px;
+}
+button:hover {
+  border-width: 3px;
+  border-color: #ccff33;
+  background: #ccff33;
+}
 .account-buttons {
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 0 10px; 
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding: 0 10px;
+  background: #38b000;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
-.user-button {
-    margin: 0 5px;
-    max-width: 100px;
+.homepage {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #006400;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #006400;
+}
+
+a:hover {
+  text-shadow: 0 0 5px #38b000, 0 0 5px #38b000;
+}
+
+.snippet-box {
+  max-width: 95%;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 0;
 }

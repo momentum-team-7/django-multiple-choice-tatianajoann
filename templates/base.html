@@ -8,19 +8,30 @@
     <script src="{% static 'prism.js' %}"></script>
     <script src="{% static 'main.js' %}" defer></script>
     <link rel="stylesheet" href="{% static 'core.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'prism.css' %}">
+    
     <title>Document</title>
 </head>
 <body>
-    <a href='http://127.0.0.1:8000'>Home</a>
-    
+
+<div class="codesnippets">
+    <center><h1>Code Snippets</h1></center>
     <div class="account-buttons">
+        <button><a href='http://127.0.0.1:8000' class="nav">Home</a></button>
+            {% if user.is_authenticated %}
+        <button><a href="{% url 'user' pk=user.pk %}" class="nav">{{request.user}}'s Snippets</a></button>
+        {% endif %} 
         <button class="user-button"><a href="http://127.0.0.1:8000/accounts/logout/">logout</a></button>
         <button class="user-button"><a href="http://127.0.0.1:8000/accounts/login/">login</a></button>
         {% if not user.is_authenticated %}
         <button class="user-button"><a href="http://127.0.0.1:8000/accounts/register/">Register</a></button>
         {% endif %}
     </div>
+    
+</div>
     
     
     {% block content %}
