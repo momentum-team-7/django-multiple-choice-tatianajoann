@@ -1,23 +1,25 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
-<p> This is the {{language}} page</p>
+<div class="languagecontain">
+    <form action="#" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" placeholder="Search...">
+    </form>
+    <p>{{language}}</p>
+<button><a href="{% url 'add-snippet' %}">Add New Snippet!</a></button>
+</div>
 
-<form action="#" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" placeholder="Search..."></input>
-</form>
 
+<div class="snippet-box">
 {% for newlanguage in newlanguages %}
 {% for snippet in snippets %}
 {% if snippet.language == newlanguage %}
-<div>
+
 <pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
 <p>author: <a href="{% url 'user' pk=snippet.user.pk %}">{{snippet.user}}</a></p>
-
 {% if snippet.user.is_authenticated %}
 {% if snippet.user == request.user %}
 <button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
@@ -26,13 +28,14 @@
 <button class="save-button" id={{snippet.pk}} data-url="{% url 'save-snippet' pk=snippet.pk %}">Save Snippet</button>
 
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
 
 </div>
-{% endif %}
-{% endif %}
-{% endfor %}
-{% endfor %}
-<button><a href="{% url 'add-snippet' %}">Add New Snippet!</a></button>
+
+
 
 
 {% endblock content %}

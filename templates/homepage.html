@@ -3,19 +3,14 @@
 {% block content %}
 
 
-<h1>This is the homepage</h1>
+
 {% for language in languages %}
 
 {% if user.is_authenticated %}
-<button><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></button>
-
-
-
+<h2><center><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></h2></center>
 {% endif %}
 
 {% endfor %}
-{% if user.is_authenticated %}
-<button><a href="{% url 'user' pk=user.pk %}">{{request.user}}'s snippets</a></button>
-{% endif %}
+
 
 {% endblock content %}
