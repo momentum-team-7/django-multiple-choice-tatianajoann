@@ -22,6 +22,7 @@ for (let button of copyButtons){
 for (let button of deleteButtons){
     button.addEventListener('click', event => {
         const snippetElement = event.target.parentElement
+        console.log(event.target.parentElement)
         const deleteUrl = event.target.dataset.url
         fetch (deleteUrl, {
             headers: {
