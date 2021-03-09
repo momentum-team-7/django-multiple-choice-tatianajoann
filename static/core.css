@@ -5,6 +5,11 @@ body {
   margin: 0 auto;
 }
 
+.profile-pic {
+  margin-right: 5px;
+  display: flex;
+}
+
 h1 {
   padding: 0;
   margin: 0;
@@ -36,6 +41,14 @@ h2:hover {
   margin-right: 100px;
   margin-left: 100px;
   font-family: "DotGothic16", sans-serif;
+}
+
+.langbtn {
+  display: inline-block;
+}
+
+form {
+  margin-right: 3px;
 }
 
 p {
@@ -78,7 +91,7 @@ a {
 
 a:visited {
   text-decoration: none;
-  color: #006400;
+  color: #000000;
 }
 
 a:hover {
@@ -91,4 +104,12 @@ a:hover {
   margin-top: 30px;
   margin-bottom: 30px;
   padding: 0;
+}
+
+.user1 {
+  text-align: center;
+}
+
+.user2 {
+  margin: 0 auto;
 }

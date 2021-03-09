@@ -12,13 +12,16 @@ import pyperclip
 
 def homepage(request):
     languages = Language.objects.all()
-    return render(request, 'homepage.html', {'languages': languages})
+    profiles = Profile.objects.all()
+    return render(request, 'homepage.html', {'languages': languages, 'profiles':profiles})
 
 
 def language_page(request, pk):
     language = get_object_or_404(Language, pk=pk)
     newlanguages = Language.objects.all()
+    profiles = Profile.objects.all()
     snippets = Snippet.objects.filter(language=language)
+    
     form = SearchForm()
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -27,7 +30,7 @@ def language_page(request, pk):
             languagesnip = snippets.filter(language__name__icontains=term)
             codesnip = snippets.filter(code__icontains=term)
             snippets = languagesnip | codesnip
-    return render(request, 'language_page.html', {'language': language, 'snippets': snippets, 'newlanguages': newlanguages, 'form': form})
+    return render(request, 'language_page.html', {'language': language, 'snippets': snippets, 'newlanguages': newlanguages, 'form': form, 'profiles':profiles})
 
 
 @login_required
