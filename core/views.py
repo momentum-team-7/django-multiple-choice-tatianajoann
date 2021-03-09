@@ -84,15 +84,19 @@ def add_snippet(request):
 def save_snippet(request, pk):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         snippet = get_object_or_404(Snippet, pk=pk)
+        user = request.user.username
         code = snippet.code
-        language = snippet.language.name
+        language = snippet.language.name.lower()
         snippet.pk = None
         snippet.user = request.user
         snippet.save()
+        pk = snippet.pk
         data = {
             'coppied': 'YES',
             'code':code,
             'language': language,
+            'user': user,
+            'pk': pk,
         }
     else:
         data = {
