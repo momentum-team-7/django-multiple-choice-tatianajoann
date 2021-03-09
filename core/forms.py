@@ -1,5 +1,5 @@
 from django import forms
-from .models import Language, Snippet
+from .models import Language, Snippet, Profile
 
 
 class LanguageForm(forms.ModelForm):
