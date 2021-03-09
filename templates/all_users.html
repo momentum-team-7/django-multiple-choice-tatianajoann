@@ -3,9 +3,20 @@
 
 {% block content %}
 
-
-{{form}}
-
-
+<div class="admin-container">
+    {% for user in users %}
+        <div class="user-slice">
+            <button class="admin-button"><a href="{% url 'user' pk=user.pk %}">{{user}}</a></button>
+            {% for profile in profiles %}
+            {% if profile.image %}
+            {% if profile.user == user %}
+                <div class="profile-pic" id="admin-page"><img src="{{profile.image.url}}" width="100px" height="100px"></div>
+        </div>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            
+            {% endfor %}
+</div>
 
 {% endblock content %}

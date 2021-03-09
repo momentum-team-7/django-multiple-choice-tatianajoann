@@ -13,7 +13,7 @@ for (let button of copyButtons){
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            console.log(data['code'])
         })
     })
 }

@@ -20,7 +20,14 @@
 <div class="codesnippets">
     <center><h1>Code Snippets</h1></center>
     <div class="account-buttons">
+
         
+
+        {% if request.user.is_superuser %}
+        <button><a href="http://127.0.0.1:8000/allusers">All Users</a></button>
+        {% endif %}
+        <button><a href='http://127.0.0.1:8000' class="nav">Home</a></button>
+
             {% if user.is_authenticated %}
             {% for profile in profiles %}
 {% if profile.user == request.user %}
@@ -41,7 +48,9 @@
     </div>
     
 </div>
-    
+{% if not user.is_authenticated %}
+<center><p>Log in or register for some awesome content</p></center>
+{% endif %}
     
     {% block content %}
 
