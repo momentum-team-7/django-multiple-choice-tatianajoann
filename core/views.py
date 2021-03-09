@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from .models import Language, Snippet, User, Profile
 from .forms import SnippetForm, LanguageForm, SearchForm
@@ -8,6 +9,15 @@ from django.http import HttpResponseRedirect, JsonResponse
 import pyperclip
 
 # Create your views here.
+
+def superuser_only(function):
+
+
+    def _inner(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            raise PermissionDenied           
+        return function(request, *args, **kwargs)
+    return _inner
 
 
 def homepage(request):
@@ -48,6 +58,12 @@ def user_page(request, pk):
             snippets = languagesnip | codesnip
     return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form, 'languages': languages, 'profiles': profiles})
 
+@superuser_only
+def all_users(request):
+    users = User.objects.all()
+    profiles = Profile.objects.all()
+    return render(request, 'all_users.html', {'users': users, 'profiles': profiles})
+
 
 def add_snippet(request):
     if request.method == 'POST':
@@ -65,9 +81,15 @@ def add_snippet(request):
 def save_snippet(request, pk):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         snippet = get_object_or_404(Snippet, pk=pk)
+        code = snippet.code
+        language = snippet.language.name
+        snippet.pk = None
+        snippet.user = request.user
         snippet.save()
         data = {
-            'coppied': 'YES'
+            'coppied': 'YES',
+            'code':code,
+            'language': language,
         }
     else:
         data = {

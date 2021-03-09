@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.homepage, name='homepage'),
+    path('allusers', views.all_users, name='all-users'),
     path('language/<int:pk>', views.language_page, name='language-page'),
     path('snippet/new', views.add_snippet, name="add-snippet"),
     path('language/new', views.add_language, name="add-language"),
@@ -32,7 +33,7 @@ urlpatterns = [
     path('snippet/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
     path('user/<int:pk>', views.user_page, name="user"),
     path('snippet/<int:pk>/copy', views.copy_snippet, name="copy-snippet"),
-    path('snippet/<int:pk>/save', views.save_snippet, name="save-snippet")
+    path('snippet/<int:pk>/save', views.save_snippet, name="save-snippet"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

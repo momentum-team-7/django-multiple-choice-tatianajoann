@@ -27,7 +27,7 @@
 
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 <br>
-{% if snippet.user == request.user %}
+{% if snippet.user == request.user or request.user.is_superuser %}
 <button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
 <br>
 <button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
@@ -40,7 +40,7 @@
 
 
 
-
+<footer><a href="{}"></a></footer>
 
 {% endfor %}
 

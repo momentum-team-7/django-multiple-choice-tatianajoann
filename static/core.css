@@ -92,3 +92,19 @@ a:hover {
   margin-bottom: 30px;
   padding: 0;
 }
+
+.admin-container {
+  display: flex;
+  flex-direction: row-wrap;
+  max-width: fit-content;
+  margin: 10px 10px;
+}
+
+.user-slice {
+  margin: 25px 10px;
+}
+
+.admin-button {
+  background-color: lightblue;
+  border-radius: 10px;
+}
