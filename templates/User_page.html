@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-{% for profile in profiles %}
-{% if profile.user == request.user %}
-{% if profile.image %}
-<div class="profile-pic"><img src="{{profile.image.url}}" width="100px" height="100px"></div>
-{% endif %}
-{% endif %}
-{% endfor %}
-
+<div class="languagecontain">
 <form action="#" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit" placeholder="Search..."></input>
 </form>
-
 {% for language in languages %}
-<button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button>
+<button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button> 
+{% endfor %}
+</div>
+
+{% for profile in profiles %}
+{% if user == profile.user %}
+<div class="user1"><img class="user2" src="{{profile.image.url}}" width="40px" height="40px">
+{{user}}'s code snippets:</div>
+{% endif %}
 {% endfor %}
 
+<div class="snippet-box">
 {% for language in languages %}
 {% for snippet in snippets %}
 {% if snippet.language == language %}
@@ -43,5 +43,6 @@
 <footer><a href="{}"></a></footer>
 
 {% endfor %}
+</div>
 
 {% endblock content %}
