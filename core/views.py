@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
-from .models import Language, Snippet, User
+from .models import Language, Snippet, User, Profile
 from .forms import SnippetForm, LanguageForm, SearchForm
 from django.http import HttpResponseRedirect, JsonResponse
 import pyperclip
@@ -34,6 +34,7 @@ def language_page(request, pk):
 def user_page(request, pk):
     languages = Language.objects.all()
     user = get_object_or_404(User, pk=pk)
+    profiles = Profile.objects.all()
     snippets = Snippet.objects.filter(user=user)
     form = SearchForm()
     if request.method == 'POST':
@@ -45,7 +46,7 @@ def user_page(request, pk):
             languagesnip = snippets.filter(language__name__icontains=term)
             codesnip = snippets.filter(code__icontains=term)
             snippets = languagesnip | codesnip
-    return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form, 'languages': languages})
+    return render(request, 'user_page.html', {'user': user, 'snippets': snippets, 'form': form, 'languages': languages, 'profiles': profiles})
 
 
 def add_snippet(request):

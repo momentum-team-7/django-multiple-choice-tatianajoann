@@ -2,6 +2,14 @@
 
 {% block content %}
 
+{% for profile in profiles %}
+{% if profile.user == request.user %}
+{% if profile.image %}
+<div class="profile-pic"><img src="{{profile.image.url}}" width="100px" height="100px"></div>
+{% endif %}
+{% endif %}
+{% endfor %}
+
 <form action="#" method="post">
     {% csrf_token %}
     {{ form }}
@@ -9,7 +17,7 @@
 </form>
 
 {% for language in languages %}
-<button><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></button>
+<button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button>
 {% endfor %}
 
 {% for language in languages %}

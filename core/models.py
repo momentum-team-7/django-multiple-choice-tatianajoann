@@ -6,6 +6,13 @@ class User(AbstractUser):
     pass
 
 
+class Profile(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='media', blank=True, null=True)
+    bio = models.TextField(max_length=350, blank=True, null=True)
+
+
 class Language(models.Model):
     name = models.CharField(max_length=280)
 

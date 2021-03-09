@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Language, Snippet
+from .models import User, Language, Snippet, Profile
 
 # Register your models here.
 
@@ -7,3 +7,4 @@ from .models import User, Language, Snippet
 admin.site.register(User)
 admin.site.register(Language)
 admin.site.register(Snippet)
+admin.site.register(Profile)

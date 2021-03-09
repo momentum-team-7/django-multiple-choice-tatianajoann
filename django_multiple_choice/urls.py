@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
+from django.conf.urls.static import static
 from core import views
 from django.http import HttpResponseRedirect
 
@@ -23,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('', views.homepage, name='homepage'),
-    path('language/<int:pk>', views.language_page, name='language_page'),
+    path('language/<int:pk>', views.language_page, name='language-page'),
     path('snippet/new', views.add_snippet, name="add-snippet"),
     path('language/new', views.add_language, name="add-language"),
     path('language/<int:pk>/edit', views.edit_language, name="edit-language"),
@@ -31,8 +32,8 @@ urlpatterns = [
     path('snippet/<int:pk>/delete', views.delete_snippet, name="delete-snippet"),
     path('user/<int:pk>', views.user_page, name="user"),
     path('snippet/<int:pk>/copy', views.copy_snippet, name="copy-snippet"),
-    path('snippet<int:pk>/save', views.save_snippet, name="save-snippet")
-]
+    path('snippet/<int:pk>/save', views.save_snippet, name="save-snippet")
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

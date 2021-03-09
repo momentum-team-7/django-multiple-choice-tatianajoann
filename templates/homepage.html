@@ -7,7 +7,7 @@
 {% for language in languages %}
 
 {% if user.is_authenticated %}
-<h2><center><a href="{% url 'language_page' pk=language.pk %}">{{language}}</a></h2></center>
+<h2><center><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></h2></center>
 {% endif %}
 
 {% endfor %}
