@@ -23,15 +23,16 @@
 {% for language in languages %}
 {% for snippet in snippets %}
 {% if snippet.language == language %}
+<div>
 <pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
 
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
-<br>
+
 {% if snippet.user == request.user or request.user.is_superuser %}
 <button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
-<br>
-<button><a href="{% url 'delete-snippet' pk=snippet.pk%}">Delete Snippet</a></button>
-<br>
+
+<button class="delete-button" id={{snippet.pk}} data-url="{% url 'delete-snippet' pk=snippet.pk %}">Destroy Snippet</button>
+</div>
 {% endif %}
 {% endif %}
 
