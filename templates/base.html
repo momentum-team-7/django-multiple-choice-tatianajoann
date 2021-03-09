@@ -35,8 +35,8 @@
 
 {% endif %}
 {% endfor %}
-       
-        <button><a href="{% url 'user' pk=user.pk %}" class="nav">{{request.user}}'s Snippets</a></button>
+        
+        <button><a href="{% url 'user' pk=request.user.pk %}" class="nav">{{request.user}}'s Snippets</a></button>
         {% endif %} 
         <button><a href='http://127.0.0.1:8000' class="nav">Home</a></button>
         <button class="user-button"><a href="http://127.0.0.1:8000/accounts/logout/">logout</a></button>
