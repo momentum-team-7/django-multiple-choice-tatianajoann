@@ -54,7 +54,7 @@ function renderSnippet(data) {
     author.innerHTML = 'author: '
 
     let userLink = document.createElement('a')
-    userLink.href = "{% url 'user' pk=snippet.user.pk %}"  
+    userLink.href = `/user/${data['user_pk']}` 
     userLink.innerHTML = `${data['user']}`
     console.log(userLink)
 
@@ -62,13 +62,13 @@ function renderSnippet(data) {
     let editButton = document.createElement('button')
 
     let editLink = document.createElement('a')
-    editLink.href = "{% url 'edit-snippet' pk=snippet.pk %}"
+    editLink.href = `/snippet/${data['code_pk']}/edit`
     editLink.innerHTML = 'Edit Snippet'
 
 
     let deleteButton = document.createElement('button')
     deleteButton.className = 'delete-button'
-    deleteButton.id = `${data['pk']}`
+    deleteButton.id = `${data['code_pk']}`
     deleteButton.dataset.url = "{% url 'delete-snippet' pk=snippet.pk %}"
     deleteButton.innerHTML = 'Destroy Snippet'
     console.log(deleteButton)
@@ -76,8 +76,8 @@ function renderSnippet(data) {
 
     let saveButton = document.createElement('button')
     saveButton.className = 'save-button'
-    saveButton.id = `${data['pk']}`
-    saveButton.dataset.url = "{% url 'save-snippet' pk=snippet.pk %}" 
+    saveButton.id = `${data['code_pk']}`
+    saveButton.dataset.url = `/snippet/${data['code_pk']}/save`
     saveButton.innerHTML = 'Save Snippet'
     console.log(saveButton)
 
@@ -85,7 +85,7 @@ function renderSnippet(data) {
     let copyButton = document.createElement('button')
 
     let copyLink = document.createElement('a')
-    copyLink.href = "{% url 'copy-snippet' pk=snippet.pk %}"
+    copyLink.href = `/snippet/${data['code_pk']}/copy`
     copyLink.innerHTML = 'Copy Snippet'
 
 
