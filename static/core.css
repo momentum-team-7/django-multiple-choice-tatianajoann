@@ -93,6 +93,10 @@ a:visited {
   color: #000000;
 }
 
+a:hover {
+  color: #9a9595;
+}
+
 .snippet-box {
   max-width: 95%;
   margin: 0 auto;
@@ -151,4 +155,11 @@ pre {
   position: -webkit-sticky;
   position: sticky;
   top: 0.1px;
+}
+
+.uploadpic {
+  font-size: 12px;
+  padding-right: 20px;
+  font-weight: bolder;
+  margin-left: 50px;
 }

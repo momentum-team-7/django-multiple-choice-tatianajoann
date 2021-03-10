@@ -19,8 +19,15 @@
         </form>
     </div>
 <div class="user1"><img class="user2" src="{{profile.image.url}}" width="40px" height="40px">{{user}}'s code snippets:</div>
+
 {% endif %}
 {% endfor %}
+
+
+{% if request.user == user %}
+<a href="{% url 'upload-image' %}" class="uploadpic">Upload Profile Pic</a>
+{% endif %}
+
 
 <div class="snippet-box">
 {% for language in languages %}
@@ -43,8 +50,6 @@
 
 
 
-
-<footer><a href="{}"></a></footer>
 
 {% endfor %}
 </div>
