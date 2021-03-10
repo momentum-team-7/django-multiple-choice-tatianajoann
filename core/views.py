@@ -2,9 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
 from django.core.exceptions import PermissionDenied
+from django.forms.widgets import ClearableFileInput
+from django import forms
 from django.db.models import Q
 from .models import Language, Snippet, User, Profile
-from .forms import SnippetForm, LanguageForm, SearchForm
+from .forms import SnippetForm, LanguageForm, SearchForm, UploadFileForm
 from django.http import HttpResponseRedirect, JsonResponse
 import pyperclip
 
@@ -80,6 +82,18 @@ def add_snippet(request):
     else:
         form = SnippetForm()
     return render(request, 'add_snippet.html', {'form': form})
+
+def upload_image(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    print(profile)
+    if request.method == 'POST': 
+        form = UploadFileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid(): 
+                form.save() 
+                return HttpResponseRedirect('/')
+    else: 
+        form = UploadFileForm()
+    return render(request, 'upload_pic.html', {'form': form})
 
 
 def save_snippet(request, pk):
