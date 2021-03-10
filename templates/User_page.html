@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="languagecontain">
-<form action="#" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" placeholder="Search..."></input>
-</form>
-{% for language in languages %}
-<button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button> 
-{% endfor %}
-</div>
 
 {% for profile in profiles %}
 {% if user == profile.user %}
-<div class="user1"><img class="user2" src="{{profile.image.url}}" width="40px" height="40px">
-{{user}}'s code snippets:</div>
+<div class="languagecontain">
+    {% for language in languages %}
+    <button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button> 
+    {% endfor %}
+    <button><a href="{% url 'add-snippet' %}">Add New Snippet!</a>
+    </div>
+    
+    <div class="languagecontain">
+        <form action="#" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" placeholder="Search...">
+        </form>
+    </div>
+<div class="user1"><img class="user2" src="{{profile.image.url}}" width="40px" height="40px">{{user}}'s code snippets:</div>
 {% endif %}
 {% endfor %}
 
