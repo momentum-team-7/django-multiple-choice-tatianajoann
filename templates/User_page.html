@@ -8,7 +8,9 @@
     {% for language in languages %}
     <button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button> 
     {% endfor %}
+    {% if request.user == profile.user %}
     <button><a href="{% url 'add-snippet' %}?next={{ request.path|urlencode }}">Add New Snippet!</a>
+    {% endif %}
     </div>
     
     <div class="languagecontain">
