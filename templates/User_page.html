@@ -43,15 +43,15 @@
 
 <button class="delete-button" id={{snippet.pk}} data-url="{% url 'delete-snippet' pk=snippet.pk %}">Destroy Snippet</button>
 </div>
+<br>
 {% endif %}
 {% endif %}
 
 {% endfor %}
-
-
-
 
 {% endfor %}
 </div>
+
+
 
 {% endblock content %}

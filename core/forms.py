@@ -20,7 +20,7 @@ class SearchForm(forms.Form):
 
 
 class UploadFileForm(forms.ModelForm):
-
+    
     class Meta:
         model = Profile
         fields = ['image']
