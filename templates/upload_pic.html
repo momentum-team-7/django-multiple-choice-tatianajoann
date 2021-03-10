@@ -8,7 +8,8 @@
     {% csrf_token %} 
     {{ form.as_p }} 
     
-    <button type="submit">Upload</button> 
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
+    <button type="submit">Upload</button>
 </form> 
 
 {% endblock content %}

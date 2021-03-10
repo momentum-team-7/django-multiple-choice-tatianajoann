@@ -14,7 +14,6 @@ import pyperclip
 
 def superuser_only(function):
 
-
     def _inner(request, *args, **kwargs):
         if not request.user.is_superuser:
             raise PermissionDenied           
@@ -34,7 +33,6 @@ def language_page(request, pk):
     newlanguages = Language.objects.all()
     profiles = Profile.objects.all()
     snippets = Snippet.objects.filter(language=language)
-    
     form = SearchForm()
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -78,10 +76,12 @@ def add_snippet(request):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return HttpResponseRedirect('/')
+            next = request.POST.get('next', '/')
+            return HttpResponseRedirect(next)
     else:
         form = SnippetForm()
     return render(request, 'add_snippet.html', {'form': form})
+
 
 def upload_image(request):
     profile = get_object_or_404(Profile, user=request.user)
@@ -89,8 +89,9 @@ def upload_image(request):
     if request.method == 'POST': 
         form = UploadFileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid(): 
-                form.save() 
-                return HttpResponseRedirect('/')
+                form.save()
+                next = request.POST.get('next', '/')
+                return HttpResponseRedirect(next)
     else: 
         form = UploadFileForm()
     return render(request, 'upload_pic.html', {'form': form})
@@ -108,7 +109,7 @@ def save_snippet(request, pk):
         code_pk = snippet.pk
         user_pk = snippet.user.pk
         data = {
-            'coppied': 'YES',
+            'copied': 'YES',
             'code':code,
             'language': language,
             'user': user,
@@ -117,7 +118,7 @@ def save_snippet(request, pk):
         }
     else:
         data = {
-            'coppied': 'NO WAY'
+            'copied': 'NO WAY'
         }
     return JsonResponse(data)
 

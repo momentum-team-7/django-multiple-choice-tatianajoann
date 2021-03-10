@@ -8,7 +8,7 @@
     {% for language in languages %}
     <button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button> 
     {% endfor %}
-    <button><a href="{% url 'add-snippet' %}">Add New Snippet!</a>
+    <button><a href="{% url 'add-snippet' %}?next={{ request.path|urlencode }}">Add New Snippet!</a>
     </div>
     
     <div class="languagecontain">
@@ -25,7 +25,7 @@
 
 
 {% if request.user == user %}
-<a href="{% url 'upload-image' %}" class="uploadpic">Upload Profile Pic</a>
+<a href="{% url 'upload-image' %}?next={{ request.path|urlencode }}" class="uploadpic">Upload Profile Pic</a>
 {% endif %}
 
 
@@ -35,7 +35,7 @@
 {% if snippet.language == language %}
 <div>
 <pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
-
+<p>language of snippet is {{ language }}</p>
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 
 {% if snippet.user == request.user or request.user.is_superuser %}
