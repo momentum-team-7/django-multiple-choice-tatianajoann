@@ -108,7 +108,7 @@ def save_snippet(request, pk):
         code_pk = snippet.pk
         user_pk = snippet.user.pk
         data = {
-            'coppied': 'YES',
+            'copied': 'YES',
             'code':code,
             'language': language,
             'user': user,
@@ -117,7 +117,7 @@ def save_snippet(request, pk):
         }
     else:
         data = {
-            'coppied': 'NO WAY'
+            'copied': 'NO WAY'
         }
     return JsonResponse(data)
 
