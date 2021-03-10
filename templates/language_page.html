@@ -27,7 +27,14 @@
 {% if snippet.language == newlanguage %}
 <div>
 <pre><code class="language-{{language}}">{{snippet.code}}</code></pre>
-<p>author: <a href="{% url 'user' pk=snippet.user.pk %}">{{snippet.user}}</a></p>
+<ul class="user4">
+{% for profile in profiles %}
+{% if snippet.user == profile.user %}
+<li><img src="{{profile.image.url}}" width="40px" height="40px"></li>
+{% endif %}
+{% endfor %}
+<li><p>author: <a href="{% url 'user' pk=snippet.user.pk %}">{{snippet.user}}</a></p></li>
+</ul>
 {% if snippet.user.is_authenticated %}
 {% if snippet.user == request.user or request.user.is_superuser %}
 <button><a href="{% url 'edit-snippet' pk=snippet.pk%}">Edit Snippet</a></button>
@@ -37,6 +44,7 @@
 
 <button><a href="{% url 'copy-snippet' pk=snippet.pk%}">Copy Snippet</a></button>
 </div>
+<br>
 {% endif %}
 {% endif %}
 {% endfor %}
