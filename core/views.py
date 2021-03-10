@@ -91,13 +91,15 @@ def save_snippet(request, pk):
         snippet.pk = None
         snippet.user = request.user
         snippet.save()
-        pk = snippet.pk
+        code_pk = snippet.pk
+        user_pk = snippet.user.pk
         data = {
             'coppied': 'YES',
             'code':code,
             'language': language,
             'user': user,
-            'pk': pk,
+            'code_pk': code_pk,
+            'user_pk': user_pk,
         }
     else:
         data = {
