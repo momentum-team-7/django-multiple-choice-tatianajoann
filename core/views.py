@@ -23,7 +23,8 @@ def superuser_only(function):
 def homepage(request):
     languages = Language.objects.all()
     profiles = Profile.objects.all()
-    return render(request, 'homepage.html', {'languages': languages, 'profiles':profiles})
+    form = SearchForm()
+    return render(request, 'homepage.html', {'languages': languages, 'profiles':profiles, 'form': form})
 
 
 def language_page(request, pk):
@@ -143,7 +144,6 @@ def add_language(request):
         form = LanguageForm()
     return render(request, 'add_language.html', {'form': form})
 
-# we might not need this or the add language but I figured I'd just put them down really quick in case we do want them & we can take them out later if not
 
 
 def edit_language(request, pk):

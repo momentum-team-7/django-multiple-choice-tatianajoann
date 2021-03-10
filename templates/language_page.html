@@ -2,15 +2,22 @@
 
 
 {% block content %}
+
+
 <div class="languagecontain">
-    <form action="#" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" placeholder="Search...">
-    </form>
-    <p>{{language}}</p>
-<button><a href="{% url 'add-snippet' %}">Add New Snippet!</a></button>
-</div>
+    {% for language in  newlanguages %}
+    <button><a href="{% url 'language-page' pk=language.pk %}">{{language}}</a></button> 
+    {% endfor %}
+    <button><a href="{% url 'add-snippet' %}">Add New Snippet!</a>
+    </div>
+    
+    <div class="languagecontain">
+        <form action="#" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" placeholder="Search...">
+        </form>
+    </div>
 
 
 <div class="snippet-box">
